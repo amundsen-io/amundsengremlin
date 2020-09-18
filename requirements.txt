@@ -1,0 +1,16 @@
+amundsen-common==0.5.1
+boto3==1.9.205
+flake8==3.7.8
+gremlinpython>=3.4.3
+isort==4.3.21
+marshmallow==2.20.5
+marshmallow-annotations==2.4.0
+mypy==0.761
+overrides==2.8.0
+pytest==5.0.1
+pytest-cov==2.5.1
+pytest-mock==1.1
+PyYAML==5.1.2
+pytz
+requests==2.23.0
+requests-aws4auth==0.9
