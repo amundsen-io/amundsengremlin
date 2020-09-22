@@ -183,7 +183,7 @@ class WellKnownProperties(Enum):
 # TODO: move this someplace shared
 def _discover_parameters(format_string: str) -> FrozenSet[str]:
     """
-    use this to discover what the parameters to a format string
+    use this to discover what the parameters are to a format string (e.g. what parameters we need for a vertex id)
     """
     parameters: FrozenSet[str] = frozenset()
     while True:
@@ -468,11 +468,9 @@ class EdgeTypes(Enum):
     Column = EdgeType.construct_type(label='COLUMN')
     Database = EdgeType.construct_type(label='DATABASE')
     Description = EdgeType.construct_type(label='DESCRIPTION')
-    Grant = EdgeType.construct_type(label='GRANT')
     Follow = EdgeType.construct_type(label='FOLLOW')
     Generates = EdgeType.construct_type(label='GENERATES')
     LastUpdatedAt = EdgeType.construct_type(label='LAST_UPDATED_AT')
-    Member = EdgeType.construct_type(label='MEMBER')
     ManagedBy = EdgeType.construct_type(label='MANAGED_BY')
     Owner = EdgeType.construct_type(label='OWNER')
     Read = EdgeType.construct_type(
@@ -484,7 +482,6 @@ class EdgeTypes(Enum):
             Property(name='read_count', type=GremlinType.Long, required=True)])
     ReadWrite = EdgeType.construct_type(label='READ_WRITE')
     ReadOnly = EdgeType.construct_type(label='READ_ONLY')
-    RequiresAccessTo = EdgeType.construct_type(label='REQUIRES_ACCESS_TO')
     Schema = EdgeType.construct_type(label='SCHEMA')
     Source = EdgeType.construct_type(label='SOURCE')
     Stat = EdgeType.construct_type(label='STAT')
