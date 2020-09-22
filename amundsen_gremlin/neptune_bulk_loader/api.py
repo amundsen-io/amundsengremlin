@@ -101,7 +101,7 @@ def override_prepared_request_parameters(
                           region_name=session.region_name, credentials=session.get_credentials())
     override_prepared_request(endpoints.gremlin_endpoint().prepare_request(), override_uri=host_to_actually_connect_to)
 
-    but note if you are not GETing (or have a payload), perpare_request doesn't *actually* generate sufficient headers
+    but note if you are not GETing (or have a payload), prepare_request doesn't *actually* generate sufficient headers
     (despite the fact that it accepts a method)
     """
     http_request_param: Dict[str, Any] = dict(url=request_parameters.uri, headers=request_parameters.headers)

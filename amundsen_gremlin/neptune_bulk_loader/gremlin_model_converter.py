@@ -90,7 +90,7 @@ def _get_key_properties(_type: Union[VertexType, EdgeType]) -> FrozenSet[Propert
 
 def _discover_parameters(format_string: str) -> FrozenSet[str]:
     """
-    use this to discover what the parameters to a format string
+    use this to discover what the parameters to a format string are
     """
     parameters: FrozenSet[str] = frozenset()
     while True:

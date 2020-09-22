@@ -344,7 +344,7 @@ class EdgeType(NamedTuple):
 
 class VertexTypes(Enum):
     """
-    In general, you will need to reload all your data: 1. change label, 2. if you change the type of a property,
+    In general, you will need to reload all your data if you: 1. change label, 2. if you change the type of a property,
     3. change the effective id_format
     """
     @classmethod
@@ -445,7 +445,7 @@ class VertexTypes(Enum):
 
 class EdgeTypes(Enum):
     """
-    In general, you will need to reload all your data: 1. change label, 2. if you change the type of a property,
+    In general, you will need to reload all your data if you: 1. change label, 2. if you change the type of a property,
     3. change the effective id_format (e.g. change required)
     """
     @classmethod

@@ -23,7 +23,7 @@ echo -e "${green}[Config]: Checking for secrets${NC}"
 git diff HEAD amundsen_gremlin/config.py | grep -q -c 'amazonaws.com'
 if [ $? -eq 0 ]
 then
-  echo -e "${red}Did you remember to remove your AWS config? If this is s a false alarm, recommit with --no-verify${NC}"
+  echo -e "${red}Did you remember to remove your AWS config? If this is a false alarm, recommit with --no-verify${NC}"
   exit 1
 else
   exit 0
