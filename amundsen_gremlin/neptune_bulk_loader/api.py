@@ -206,9 +206,7 @@ class NeptuneBulkLoaderLoadStatus(TypedDict):
 
 
 class BulkLoaderParallelism(Enum):
-    """
-    Literal might be better for this in 3.8?
-    """
+    # TODO: Literal might be better for this in 3.8?
     LOW = auto()
     MEDIUM = auto()
     HIGH = auto()
@@ -225,7 +223,7 @@ class BulkLoaderFormat(Enum):
     N_TRIPLES = 'ntriples'
     N_QUADS = 'nquads'
     RDF_XML = 'rdfxml'
-    TURTLE = 'turtle'  # no, this is totaly a coincidence
+    TURTLE = 'turtle'
 
 
 class NeptuneBulkLoaderApi:
@@ -397,7 +395,6 @@ def group_by_class(entities: Mapping[GraphEntityType, Mapping[str, GraphEntity]]
     vertex_types: Mapping[GraphEntityType, List[GraphEntity]] = defaultdict(list)
     edge_types: Mapping[GraphEntityType, List[GraphEntity]] = defaultdict(list)
     for t, es in entities.items():
-        # there was a slicker (10 lines shorter) map based implementation in pasta.py but it defeated the type checker
         if isinstance(t, VertexType):
             assert not isinstance(t, EdgeType)
             vertex_types[t].extend(es.values())

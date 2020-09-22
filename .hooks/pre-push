@@ -4,7 +4,7 @@ red='\033[0;31m'
 green='\033[0;32m'
 NC='\033[0m'
 
-set -e 
+set -e -o pipefail
 
 # Get only the files different on this branch
 BASE_SHA="$(git merge-base master HEAD)"
@@ -20,7 +20,8 @@ then
   # Run flake8
   flake8 .
 
-  if [ $? -ne 0 ]; then
+  if [ $? -ne 0 ]
+  then
     echo -e "${red}[Python Style][Error]: Fix the issues and commit again (or commit with --no-verify if you are sure)${NC}"
     exit 1
   fi
@@ -28,7 +29,8 @@ then
   # Run mypy
   mypy .
 
-  if [ $? -ne 0 ]; then
+  if [ $? -ne 0 ]
+  then
     echo -e "${red}[Python Type Checks][Error]: Fix the issues and commit again (or commit with --no-verify if you are sure)${NC}"
     exit 1
   fi

@@ -21,6 +21,7 @@ NEPTUNE_URLS_BY_USER: Mapping[str, Mapping[str, Any]] = {
 def neptune_url_for_development(*, user: Optional[str] = None) -> Optional[Mapping[str, Any]]:
     # Hello!  If you get here and and your user is not above, ask one of them to borrow theirs. Or add your username
     # to development_instance_users in terraform/deployments/development/main.tf and terraform apply
+    # TODO: add terraform files. One stopgap is to manually set up neptune instances for each dev user.
     return NEPTUNE_URLS_BY_USER[os.getenv('USER', 'nobody')]
 
 
