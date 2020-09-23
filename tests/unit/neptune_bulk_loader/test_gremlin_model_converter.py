@@ -117,6 +117,7 @@ class TestGetGraph(unittest.TestCase):
                 {'created': created_at, '~from': {'~label': 'Table', 'key': 'Snowflake://production.esikmo/floes'},
                  '~to': {'~label': 'Updatedtimestamp', 'key': 'Snowflake://production.esikmo/floes'}}],
             VertexTypes.Updatedtimestamp.value: [
+                {'key': 'amundsen_updated_timestamp', 'latest_timestamp': created_at},
                 {'key': 'Snowflake://production.esikmo/igloo', 'latest_timestamp': created_at},
                 {'key': 'Snowflake://production.esikmo/floes', 'latest_timestamp': created_at}],
             EdgeTypes.Column.value: [
@@ -280,6 +281,7 @@ class TestGetGraph(unittest.TestCase):
                  '~to': {'~label': 'Updatedtimestamp', 'key': 'Snowflake://production.esikmo/igloo'}},
             ],
             VertexTypes.Updatedtimestamp.value: [
+                {'key': 'amundsen_updated_timestamp', 'latest_timestamp': created_at},
                 {'key': 'Snowflake://production.esikmo/electric-bugaloo', 'latest_timestamp': created_at},
                 {'key': 'Snowflake://production.esikmo/igloo', 'latest_timestamp': created_at},
             ],
