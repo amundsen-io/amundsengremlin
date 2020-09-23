@@ -499,6 +499,10 @@ class _GetGraph:
                 # distinguishes)
 
             # update timestamp
+            # Amundsen global timestamp
+            cls._create(VertexTypes.Updatedtimestamp, entities, existing, key='amundsen_updated_timestamp',
+                        latest_timestamp=created_at)
+            # Table-specific timestamp
             vertex = cls._create(VertexTypes.Updatedtimestamp, entities, existing, key=table_vertex['key'],
                                  latest_timestamp=created_at)
             cls._create(EdgeTypes.LastUpdatedAt, entities, existing, created=created_at, **{
