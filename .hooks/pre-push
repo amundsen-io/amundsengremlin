@@ -1,0 +1,42 @@
+#!/bin/sh
+
+red='\033[0;31m'
+green='\033[0;32m'
+NC='\033[0m'
+
+set -e -o pipefail
+
+# Get only the files different on this branch
+BASE_SHA="$(git merge-base master HEAD)"
+FILES="$(git diff --name-only --diff-filter=AMC $BASE_SHA HEAD | grep "\.py$" | tr '\n' ' ')"
+
+echo -e "${green}[Python Checks][Info]: Checking Python Style, Types${NC}"
+
+if [ -n "$FILES" ]
+then
+
+  echo -e "${green}[Python Checks][Info]: ${FILES}${NC}"
+
+  # Run flake8
+  flake8 .
+
+  if [ $? -ne 0 ]
+  then
+    echo -e "${red}[Python Style][Error]: Fix the issues and commit again (or commit with --no-verify if you are sure)${NC}"
+    exit 1
+  fi
+
+  # Run mypy
+  mypy .
+
+  if [ $? -ne 0 ]
+  then
+    echo -e "${red}[Python Type Checks][Error]: Fix the issues and commit again (or commit with --no-verify if you are sure)${NC}"
+    exit 1
+  fi
+
+else
+  echo -e "${green}[Python Checks][Info]: No files to check${NC}"
+fi
+
+exit 0

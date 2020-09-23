@@ -1,0 +1,28 @@
+#!/bin/sh
+
+red='\033[0;31m'
+green='\033[0;32m'
+NC='\033[0m'
+
+# Sort imports
+echo -e "${green}[Isort]: Checking Sorting${NC}"
+isort -c
+if [ $? -ne 0 ]
+then
+  isort --apply 
+  echo -e "${red}Sorted imports; recommit${NC}"
+  exit 1
+fi
+
+# Check Neptune config
+
+echo -e "${green}[Config]: Checking for secrets${NC}"
+
+# Grep will return 0 if and only if it finds a changed amazonaws url. This suggests you may accidentally be publically
+# committing your config!
+git diff HEAD amundsen_gremlin/config.py | grep -q -c 'amazonaws.com'
+if [ $? -eq 0 ]
+then
+  echo -e "${red}Did you remember to remove your AWS config? If this is a false alarm, recommit with --no-verify${NC}"
+  exit 1
+fi

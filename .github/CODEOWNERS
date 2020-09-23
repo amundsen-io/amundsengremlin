@@ -6,8 +6,8 @@
 
 # These owners will be the default owners for everything in
 # the repo. Unless a later match takes precedence,
-# @amundsen-io/amundsen-committerswill be requested for
+#  @amundsen-io/amundsen-gremlin-committers will be requested for
 # review when someone opens a pull request.
-*       @amundsen-io/amundsen-committers
+*       @amundsen-io/amundsen-gremlin-committers
 
 *.py    @alran @cpu @dsimms @friendtocephalopods @kathawthorne @worldwise001
