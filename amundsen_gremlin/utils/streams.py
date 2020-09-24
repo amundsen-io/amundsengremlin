@@ -354,6 +354,7 @@ def consume_in_chunks(*, stream: Iterable[V], n: int, consumer: Callable[[Iterab
     return _actual_state
 
 
+# NB: This will not work on python 3.6; requires 3.7 or later
 async def async_consume_in_chunks(*, stream: AsyncIterator[V], n: int, consumer: Callable[[Iterable[V]], None],
                                   metric: Callable[[V], int] = one) -> int:
     _actual_state: int = 0

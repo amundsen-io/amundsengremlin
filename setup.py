@@ -10,18 +10,22 @@ neptune_python_utils_package_directories = dict((name, f'amazon-neptune-tools/ne
 
 setup(
     name='amundsen-gremlin',
-    version='0.0.2',
+    version='0.0.3',
     description='Gremlin code library for Amundsen',
     long_description=open('README.md').read(),
     url='https://github.com/amundsen-io/amundsengremlin',
-    maintainer='Linux Foundation',
-    maintainer_email='amundsen-dev@lyft.com',
+    maintainer='Amundsen TSC',
+    maintainer_email='amundsen-tsc@lists.lfai.foundation',
     packages=find_packages(exclude=['tests*']) + neptune_python_utils_package_names,
     package_dir=neptune_python_utils_package_directories,
     zip_safe=False,
     dependency_links=[],
     include_package_data=True,
     install_requires=[],
-    python_requires=">=3.7",
+    python_requires=">=3.6",
     package_data={'amundsen_gremlin': ['py.typed']},
+    classifiers=[
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+    ],
 )
