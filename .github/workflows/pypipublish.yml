@@ -17,6 +17,12 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.6
+      - name: Ready submodule
+        run: git submodule update --init
+      - name: Fetch submodule
+        run: git submodule status --recursive
+      - name: Populate packages with submodule
+        run: python setup.py install
       - name: Add wheel dependency
         run: pip install wheel
       - name: Generate dist
