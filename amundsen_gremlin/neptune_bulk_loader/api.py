@@ -24,6 +24,7 @@ from gremlin_python.driver.driver_remote_connection import (
 )
 from gremlin_python.process.anonymous_traversal import traversal
 from gremlin_python.process.graph_traversal import GraphTraversalSource
+from neptune_python_utils.endpoints import Endpoints, RequestParameters
 from requests_aws4auth import AWS4Auth
 from tornado import httpclient
 from typing_extensions import TypedDict  # is in typing in 3.8
@@ -35,7 +36,6 @@ from amundsen_gremlin.test_and_development_shard import get_shard
 from for_requests.assume_role_aws4auth import AssumeRoleAWS4Auth
 from for_requests.aws4auth_compatible import to_aws4_request_compatible_host
 from for_requests.host_header_ssl import HostHeaderSSLAdapter
-from neptune_python_utils.endpoints import Endpoints, RequestParameters
 from ssl_override_server_hostname.ssl_context import (
     OverrideServerHostnameSSLContext
 )
