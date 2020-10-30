@@ -18,7 +18,7 @@ https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-gremlin-differ
 * Create a Security Group that allows connections to your Neptune instance.  (safely)
 * Create a VPC endpoint for S3, a bucket, and a Role by which Neptune can access that.
 * Create Neptune cluster and instances.
-* Create user(s) and give it(them) access to Neptune and S3.
+* Create user(s) and give them access to Neptune and S3.
 * (possibly) Create public endpoint for Neptune.
 * Configure amundsen-gremlin
 
@@ -45,21 +45,21 @@ because the policies of the S3 VPC Endpoint, the Bucket permissions on the S3 Bu
 per-Object permissions on the files in the Bucket, as well as those of the assumed Role.)
 
 The terraform example creates: the S3 VPC Endpoint, a role for Neptune which gives it readonly
-access to all S3 buckets and object (in that account), and a bucket.
+access to all S3 buckets and objects (in that account), and a bucket.
 
 ### Create Neptune cluster and instances
 
 Possibly, you will create a Neptune Subnet Group.  If you're using the default VPC, a Neptune
 Subnet Group already exists.  Otherwise, you create one. 
 
-Then Create a cluster and (at least) one instance, using the Security Group and assumable Role.
+Then create a cluster and (at least) one instance, using the Security Group and assumable Role.
 The cluster's `cluster_identifier` and the instance's `identifier` will become part of the DNS
 names so choose them appropriately.  The `instance_class` configures the amount of RAM, CPU, and
-IO available to the instance, as well is being the primary factor in cost.  (Chosing this is
+IO available to the instance, as well as being the primary factor in cost.  (Chosing this is
 experimental, and beyond the scope of this guide.)  
 
-There are other interesting paramters related to admininstration: the maintenance window,
-automatic minor version upgrades, deletion protection, backup retentoin, encryption-at-rest and
+There are other interesting parameters related to administration: the maintenance window,
+automatic minor version upgrades, deletion protection, backup retention, encryption-at-rest and
 key management for that, default query execution timeouts.  (These are also beyond the scope of
 this.)
 
@@ -67,15 +67,15 @@ this.)
 The terraform example configures a Neptune Subnet Group, a Neptune Cluster, and 2 Neptune Instances.
 
 
-### Create user(s) and give it(them) access to Neptune and S3
+### Create user(s) and give them access to Neptune and S3
 
 The metadata and dataloader processes require access to Neptune and S3.  In the most direct setup,
 each would use a distinct IAM user and receive just those permissions required to access Neptune
-and S3.  An another, you might run the metadata service and dataloader processes in EC2 and you
+and S3.  In another, you might run the metadata service and dataloader processes in EC2 and you
 would grant whatever Role they assume the required permissions for Neptune and S3.
 
 The terraform example creates a Policy which gives the metadata and dataloader services sufficient
-access, and creates 2 Users and gives attaches the Policy.
+access, and creates 2 Users and attaches the Policy.
 
 
 ### Create public endpoint for Neptune
@@ -86,14 +86,14 @@ https://github.com/aws-samples/aws-dbs-refarch-graph/tree/master/src/connecting-
 as well as glue to allow the mismatch in hostnames.
 
 
-The terraform sets up a publicly available NLB -- albeit statically configured, so is only suitable
+The terraform sets up a publicly available NLB -- albeit statically configured, so it is only suitable
 for development or other deployments where one could tolerate downtime as instances are
 reconfigured.  (Or you could apply the CloudWatch + Lambda approach and minimize that downtime.)
 
 
 ### Configure amundsen-gremlin
 
-amundsen-gremlin needs to know about some of the resources you configured:
+amundsen-gremlin needs to know about some of the resources you configured with Terraform:
 
 * `AWS_REGION_NAME`: name of the AWS region in which you created the Neptune instance
 * `NEPTUNE_BULK_LOADER_S3_BUCKET_NAME`: name of the bucket to use for the Neptune Bulk Loader input
@@ -128,8 +128,8 @@ amundsen-gremlin needs to know about some of the resources you configured:
 ## IAM authentication
 
 You should use IAM authentication.  However, it comes with some mild complications.  The gremlin
-transport is usually websockets, and the requests-aws4auth library we use elsewhere is for requests,
-which does not support websockets at all.  In the [amazon-neptune-tools](
+transport is usually websockets, and the requests-aws4auth library we use elsewhere is for [requests](https://requests.readthedocs.io/en/master/),
+which does not support websockets at all.  In [amazon-neptune-tools](
 https://github.com/awslabs/amazon-neptune-tools/tree/master/neptune-python-utils), there is an
 example for authenticating gremlin websocket connection which is reused herein.  (But is technically
 an example so may or may not work in your circumstances.)
@@ -137,10 +137,10 @@ an example so may or may not work in your circumstances.)
 
 ## How to get a gremlin console for Neptune
 
-They (AWS) [have a goodrecipe](
+AWS [has a good recipe](
 https://docs.aws.amazon.com/neptune/latest/userguide/iam-auth-connecting-gremlin-java.html).
 
-You may also be interested in using[Jupyter/Sagemaker](
+You may also be interested in using [Jupyter/Sagemaker](
 https://aws.amazon.com/blogs/database/analyze-amazon-neptune-graphs-using-amazon-sagemaker-jupyter-notebooks/)
 as a Gremlin console w/ some visualization support.
 

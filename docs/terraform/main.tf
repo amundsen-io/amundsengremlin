@@ -133,7 +133,6 @@ resource "aws_neptune_cluster" "service" {
   engine = "neptune"
   cluster_identifier = var.service
   iam_database_authentication_enabled = true
-  # engine_version default
   neptune_cluster_parameter_group_name = aws_neptune_cluster_parameter_group.service.name
   vpc_security_group_ids = [
     aws_security_group.allow_gremlin[0].id,
@@ -178,9 +177,9 @@ resource "aws_neptune_cluster_instance" "service" {
 # Supposing you need a public Neptune endpoint, that doesn't happen directly out of the box.
 # Our solution is this:
 #   * put an NLB (network load balancer) in front of each cluster
-#   * the points at an IP address and TCP port (the Neptune server)
+#   * that points at an IP address and TCP port (the Neptune server)
 #   * the Neptune server terminates TLS
-#   * but because the address we connect to is different that what it advertises, we install a special
+#   * but because the address we connect to is not present as a subject in the Neptune TLS certificate, we install a special
 #     SSLContext (for Gremlin/GLV) or HostAdapter (for requests)
 # You have questions:
 #   * Why not an ALB? And let the it terminate TLS and HTTP?  its health checks on the downstream 
