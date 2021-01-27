@@ -236,7 +236,7 @@ class NeptuneBulkLoaderApi:
             not self.endpoint_uri.query, f'expected gremlin uri: {endpoint_uri}'
         self.override_uri = _urlsplit_if_not_already(override_uri) if override_uri is not None else None
         account_id = self.session.client('sts').get_caller_identity()['Account']
-        self.iam_role_arn = f'arn:aws:iam::{account_id}:role/NeptuneLoadFromS3'
+        self.iam_role_arn = f'arn:aws:iam::{account_id}:role/{iam_role_name}'
         self.s3_bucket_name = s3_bucket_name
         # See https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3.html#using-the-transfer-manager
         self.s3_transfer_config = TransferConfig(
