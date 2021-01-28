@@ -10,7 +10,7 @@ neptune_python_utils_package_directories = dict((name, f'amazon-neptune-tools/ne
 
 setup(
     name='amundsen-gremlin',
-    version='0.0.5',
+    version='0.0.6',
     description='Gremlin code library for Amundsen',
     url='https://github.com/amundsen-io/amundsengremlin',
     maintainer='Amundsen TSC',
