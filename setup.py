@@ -12,7 +12,6 @@ setup(
     name='amundsen-gremlin',
     version='0.0.5',
     description='Gremlin code library for Amundsen',
-    long_description=open('README.md').read(),
     url='https://github.com/amundsen-io/amundsengremlin',
     maintainer='Amundsen TSC',
     maintainer_email='amundsen-tsc@lists.lfai.foundation',
