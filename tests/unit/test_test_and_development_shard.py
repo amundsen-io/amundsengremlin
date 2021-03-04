@@ -59,15 +59,6 @@ class TestTestShard(unittest.TestCase):
             actual = _shard_default()
             self.assertEqual('jack', actual)
 
-    def test_shard_default_local_explodes(self) -> None:
-        with mock.patch.dict(os.environ):
-            os.environ.pop('CI', None)
-            os.environ.pop('BUILD_PART_ID', None)
-            os.environ.pop('DATACENTER', None)
-            os.environ.pop('USER', None)
-            with self.assertRaisesRegex(AssertionError, 'Expected USER environment variable to be set'):
-                _shard_default()
-
     def test_shard_default_environment_production(self) -> None:
         with mock.patch.dict(os.environ):
             os.environ.pop('CI', None)

@@ -33,7 +33,7 @@ def _shard_default() -> Optional[str]:
             return build_part_id
     elif os.environ.get('DATACENTER', 'local') == 'local':
         # this replaces the NEPTUNE_URLS_BY_USER et al in Development.
-        user = os.environ.get('USER')
+        user = os.environ.get('USER', 'test_user')
         assert user is not None, f'Expected USER environment variable to be set'
 
         # e.g. gw0 if -n or main if -n0
