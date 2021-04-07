@@ -1,6 +1,7 @@
 # Copyright Contributors to the Amundsen project.
 # SPDX-License-Identifier: Apache-2.0
 
+import distutils.util
 import os
 from threading import Lock
 from typing import Optional
@@ -14,7 +15,9 @@ _shard_used = False
 
 
 def _shard_default() -> Optional[str]:
-    if os.environ.get('CI'):
+    if distutils.util.strtobool(os.environ.get('IGNORE_NEPTUNE_SHARD', 'False')):
+        return None
+    elif os.environ.get('CI'):
         # TODO: support CI-specific env variables in config?
         #   BUILD_PART_ID: identifies a part-build (doesn't change when you click rebuild, but also not shared across
         #     builds)
