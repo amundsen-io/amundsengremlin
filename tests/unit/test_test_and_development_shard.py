@@ -69,6 +69,14 @@ class TestTestShard(unittest.TestCase):
             actual = _shard_default()
             self.assertIsNone(actual)
 
+    def test_shard_default_environment_ignoring_shard(self) -> None:
+        with mock.patch.dict(os.environ):
+            os.environ.pop('CI', None)
+            os.environ.pop('BUILD_PART_ID', None)
+            os.environ['IGNORE_NEPTUNE_SHARD'] = 'True'
+            actual = _shard_default()
+            self.assertIsNone(actual)
+
     def test_shard_default_environment_staging(self) -> None:
         with mock.patch.dict(os.environ):
             os.environ.pop('CI', None)
