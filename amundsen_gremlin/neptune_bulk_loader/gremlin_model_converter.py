@@ -485,7 +485,7 @@ class _GetGraph:
             for description in table.programmatic_descriptions:
                 cls._description_entities(
                     subject_uri=table_vertex['key'], to_vertex_id=table_vertex[MagicProperties.ID.value.name],
-                    description_source=description.source, entities=entities, existing=existing, created_at=created_at,
+                    source=description.source, entities=entities, existing=existing, created_at=created_at,
                     description=description.text)
                 # TODO: need to call expire source != 'user' description links after
 
