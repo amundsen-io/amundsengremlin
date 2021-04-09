@@ -383,7 +383,12 @@ class VertexTypes(Enum):
         label='Description',
         properties=[
             Property(name='description', type=GremlinType.String, required=True),
-            Property(name='source', type=GremlinType.String, required=True, comment='effectively an enum')])
+            Property(name='description_source', type=GremlinType.String, required=True, comment='effectively an enum')])
+    Programmatic_Description = VertexType.construct_type(
+        label='Programmatic_Description',
+        properties=[
+            Property(name='description', type=GremlinType.String, required=True),
+            Property(name='description_source', type=GremlinType.String, required=True, comment='effectively an enum')])
     Schema = VertexType.construct_type(
         label='Schema',
         properties=[Property(name='name', type=GremlinType.String, required=True)])
