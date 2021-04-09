@@ -96,7 +96,10 @@ def make_shard_uri(*, table_uri: str, shard_name: str) -> str:
 
 
 def make_description_uri(*, subject_uri: str, source: str) -> str:
-    return f'{subject_uri}/{source}/_description'
+    if source == 'description':
+        return f'{subject_uri}/_description'
+    else:
+        return f'{subject_uri}/_{source}_description'
 
 
 def make_column_uri(*, table_uri: str, column_name: str) -> str:

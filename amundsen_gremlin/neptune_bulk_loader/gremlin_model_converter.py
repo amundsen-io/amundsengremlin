@@ -546,7 +546,7 @@ class _GetGraph:
                               created_at: datetime.datetime) -> None:
         vertex = cls._create(VertexTypes.Description, entities, existing,
                              key=make_description_uri(subject_uri=subject_uri, source=source),
-                             description=description, source=source)
+                             description=description, description_source=source)
         cls._create(EdgeTypes.Description, entities, existing, created=created_at, **{
             MagicProperties.FROM.value.name: to_vertex_id,
             MagicProperties.TO.value.name: vertex[MagicProperties.ID.value.name]})
