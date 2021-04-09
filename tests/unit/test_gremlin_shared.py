@@ -31,10 +31,10 @@ class TestGremlinShared(unittest.TestCase):
         self.assertEqual('BigQuery://neverland.production/lost_boys/peter_pan',
                          make_column_uri(column_name='peter_pan',
                                          table_uri='BigQuery://neverland.production/lost_boys'))
-        self.assertEqual('BigQuery://neverland.production/lost_boys/user/_description',
+        self.assertEqual('BigQuery://neverland.production/lost_boys/_user_description',
                          make_description_uri(source='user',
                                               subject_uri='BigQuery://neverland.production/lost_boys'))
-        self.assertEqual('BigQuery://neverland.production/lost_boys/peter_pan/user/_description',
+        self.assertEqual('BigQuery://neverland.production/lost_boys/peter_pan/_user_description',
                          make_description_uri(
                              source='user',
                              subject_uri='BigQuery://neverland.production/lost_boys/peter_pan'))

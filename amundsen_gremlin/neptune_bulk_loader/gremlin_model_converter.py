@@ -485,7 +485,7 @@ class _GetGraph:
             for description in table.programmatic_descriptions:
                 cls._description_entities(
                     subject_uri=table_vertex['key'], to_vertex_id=table_vertex[MagicProperties.ID.value.name],
-                    source=description.source, entities=entities, existing=existing, created_at=created_at,
+                    description_source=description.source, entities=entities, existing=existing, created_at=created_at,
                     description=description.text)
                 # TODO: need to call expire source != 'user' description links after
 
@@ -546,7 +546,7 @@ class _GetGraph:
                               created_at: datetime.datetime) -> None:
         vertex = cls._create(VertexTypes.Description, entities, existing,
                              key=make_description_uri(subject_uri=subject_uri, source=source),
-                             description=description, source=source)
+                             description=description, description_source=source)
         cls._create(EdgeTypes.Description, entities, existing, created=created_at, **{
             MagicProperties.FROM.value.name: to_vertex_id,
             MagicProperties.TO.value.name: vertex[MagicProperties.ID.value.name]})
