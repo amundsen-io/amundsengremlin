@@ -22,6 +22,7 @@ from flask import Config
 from gremlin_python.driver.driver_remote_connection import (
     DriverRemoteConnection
 )
+from gremlin_python.driver.tornado.transport import TornadoTransport
 from gremlin_python.process.anonymous_traversal import traversal
 from gremlin_python.process.graph_traversal import GraphTraversalSource
 from neptune_python_utils.endpoints import Endpoints, RequestParameters
@@ -87,7 +88,7 @@ def get_neptune_graph_traversal_source_factory(*, neptune_url: Union[str, Mappin
         prepared_request = override_prepared_request_parameters(
             endpoints.gremlin_endpoint().prepare_request(), override_uri=override_uri)
         kwargs['traversal_source'] = 'g'
-        remote_connection = DriverRemoteConnection(url=prepared_request, **kwargs)
+        remote_connection = DriverRemoteConnection(url=prepared_request, transport_factory=lambda: TornadoTransport(read_timeout=None, write_timeout=None), **kwargs)
         return traversal().withRemote(remote_connection)
     return create_graph_traversal_source
 
