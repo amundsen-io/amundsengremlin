@@ -230,13 +230,14 @@ class BulkLoaderFormat(Enum):
 class NeptuneBulkLoaderApi:
     def __init__(self, *, session: boto3.session.Session, endpoint_uri: Union[str, SplitResult],
                  override_uri: Optional[Union[str, SplitResult]] = None,
-                 iam_role_name: str = 'NeptuneLoadFromS3', s3_bucket_name: str) -> None:
+                 iam_role_name: str = 'NeptuneLoadFromS3', s3_bucket_name: str,
+                 sts_endpoint: Optional[str] = None) -> None:
         self.session = session
         self.endpoint_uri = _urlsplit_if_not_already(endpoint_uri)
         assert self.endpoint_uri.path == '/gremlin' and self.endpoint_uri.scheme in ('ws', 'wss') and \
             not self.endpoint_uri.query, f'expected gremlin uri: {endpoint_uri}'
         self.override_uri = _urlsplit_if_not_already(override_uri) if override_uri is not None else None
-        account_id = self.session.client('sts').get_caller_identity()['Account']
+        account_id = self.session.client('sts', endpoint_url=sts_endpoint).get_caller_identity()['Account']
         self.iam_role_arn = f'arn:aws:iam::{account_id}:role/{iam_role_name}'
         self.s3_bucket_name = s3_bucket_name
         # See https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3.html#using-the-transfer-manager
