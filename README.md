@@ -6,6 +6,7 @@
 
 Amundsen Gremlin contains code to use AWS Neptune as the graph backend for Amundsen. Specifically it uploads two CSVs -- one for vertices, one for edges -- to an S3 bucket, then tells the [bulk loader](https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load.html) to import those into the graph database. In order to prevent duplicate vertexes/edges, we specify the key of each.
 
+
 ## Requirements
 
 It can be used with Python 3.6 except for `async_consume_in_chunks` which relies on Python 3.7 asyncio functionality.
