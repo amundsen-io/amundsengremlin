@@ -263,7 +263,7 @@ class NeptuneBulkLoaderApi:
         s3_bucket_name = config.get('NEPTUNE_BULK_LOADER_S3_BUCKET_NAME')
         assert s3_bucket_name is not None and isinstance(s3_bucket_name, str)
         return cls(endpoint_uri=endpoint_uri, override_uri=override_uri, session=config.get('NEPTUNE_SESSION'),
-                   s3_bucket_name=s3_bucket_name)
+                   s3_bucket_name=s3_bucket_name, sts_endpoint=config.get('STS_ENDPOINT'))
 
     def _get_aws4auth(self, service_name: str) -> AWS4Auth:
         return AssumeRoleAWS4Auth(self.session.get_credentials(), self.session.region_name, service_name)
